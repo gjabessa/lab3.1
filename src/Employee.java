@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Employee {
 	private String employeeId;
@@ -9,14 +10,11 @@ public class Employee {
 	private String SSN;
 	private double salary;
 	
-	Employee(){
-		
-	}
-	
+	Position position;	
 	
 	
 	public Employee(String employeeId, String firstName, String middleInitial, String lastName, LocalDate birthDate,
-			String sSN, double salary) {
+			String sSN, double salary, Position position) {
 		super();
 		this.employeeId = employeeId;
 		this.firstName = firstName;
@@ -25,6 +23,7 @@ public class Employee {
 		this.birthDate = birthDate;
 		SSN = sSN;
 		this.salary = salary;
+		this.position = position;
 	}
 
 
@@ -35,6 +34,27 @@ public class Employee {
 
 
 
+	public boolean equals(Object obj) {
+		
+		if(this == obj) {
+			return true;
+		}
+		if(obj == null) {
+			return false;
+		} 
+		if(obj.getClass() != this.getClass()) {
+			return false;
+		}
+		if(!((Employee)obj).position.equals(this.position)) {
+			return false;
+		}
+		return Integer.compare(obj.hashCode(), this.hashCode()) == 0;
+		
+	}
+	public int hashCode() {
+		return Objects.hash(employeeId, firstName,middleInitial,lastName,birthDate,SSN,salary);
+	}
+	
 	public void setSSN(String sSN) {
 		SSN = sSN;
 	}
